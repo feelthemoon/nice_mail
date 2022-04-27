@@ -5,4 +5,5 @@ module.exports = {
   css: {
     extract: true,
   },
+  transpileDependencies: ['vuex-persist', 'primevue'],
 };
