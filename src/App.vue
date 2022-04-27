@@ -1,30 +1,48 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="app">
+    <div class="alerts">
+      <Message
+        v-for="(alert, i) in alerts"
+        :key="i"
+        :life="alert.life"
+        :sticky="false"
+        :summary="alert.message"
+        :severity="alert.severity"
+      >
+      </Message>
+    </div>
+    <Header></Header>
+    <div class="container">
+      <router-view />
+    </div>
   </div>
-  <router-view />
 </template>
+<script lang="ts">
+import { computed, defineComponent } from 'vue';
+import { useStore } from '@/store';
+import Header from '@/components/Header.vue';
+import Message from 'primevue/message';
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+export default defineComponent({
+  components: {
+    Header,
+    Message,
+  },
+  setup() {
+    const store = useStore();
+    const alerts = computed(() => store.getters.alerts);
 
-#nav {
-  padding: 30px;
+    return {
+      alerts,
+    };
+  },
+});
+</script>
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+<style scoped lang="scss">
+.alerts {
+  position: fixed;
+  right: 30px;
+  z-index: 2000;
 }
 </style>
