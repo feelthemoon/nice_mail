@@ -5,6 +5,7 @@
       :modal="true"
       header="Login to your account"
       v-model:visible="showDialog"
+      @hide="resetForm"
       dismissableMask
     >
       <TabMenu
@@ -101,6 +102,7 @@ export default defineComponent({
       email: '',
       password: '',
     });
+
     const passwordValidator = (value: string) => {
       return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/.test(value);
     };
@@ -115,6 +117,12 @@ export default defineComponent({
     const v$ = useVuelidate(rules, { user });
 
     const buttonText = computed(() => (loginType.value ? 'Register' : 'Login'));
+
+    const resetForm = () => {
+      user.email = '';
+      user.password = '';
+      v$.value.$reset();
+    };
 
     const updateShowDialog = () => {
       showDialog.value = !showDialog.value;
@@ -145,6 +153,7 @@ export default defineComponent({
       updateShowDialog,
       authUser,
       changeLoginType,
+      resetForm,
     };
   },
 });
