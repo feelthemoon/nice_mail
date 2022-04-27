@@ -55,6 +55,7 @@
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
       "vue-cli-service lint",
+      "prettier --write \"src/**/*.vue\" \"src/**/*.ts\" \"src/**/*.scss\"",
       "git add"
     ]
   }
