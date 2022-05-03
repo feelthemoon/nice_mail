@@ -20,6 +20,17 @@ export class TempmailService {
     }
   }
 
+  async getMessages(mail: string) {
+    const [login, domain] = mail.split('@');
+
+    const messages = await lastValueFrom(
+      this.httpService.get(
+        `${process.env.SEC_MAIL_API}?action=getMessages&login=${login}&domain=${domain}`,
+      ),
+    );
+    return messages.data;
+  }
+
   private async generateMail(count: number) {
     const mail = await lastValueFrom(
       this.httpService.get(`${process.env.SEC_MAIL_API}?action=genRandomMailbox&count=${count}`),

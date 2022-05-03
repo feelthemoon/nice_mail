@@ -4,6 +4,7 @@ import { TempmailService } from './tempmail.service';
 import { HttpModule } from '@nestjs/axios';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
+import { TempmailGateway } from './tempmail.gateway';
 
 @Module({
   imports: [
@@ -13,10 +14,10 @@ import { ConfigModule } from '@nestjs/config';
     HttpModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET_KEY,
-      signOptions: { expiresIn: '24h' },
+      signOptions: { expiresIn: '10m' },
     }),
   ],
   controllers: [TempmailController],
-  providers: [TempmailService],
+  providers: [TempmailService, TempmailGateway],
 })
 export class TempmailModule {}

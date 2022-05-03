@@ -64,7 +64,10 @@ export default defineComponent({
         label: 'Refresh',
         icon: 'pi pi-refresh',
         command: () => {
-          return store.dispatch('mail/getRandomMail', { force: true });
+          return store
+            .dispatch('mail/getRandomMail', { force: true })
+            .then(() => store.dispatch('mail/connectWS'))
+            .then(() => store.dispatch('mail/getMessages'));
         },
       },
       {
@@ -78,7 +81,10 @@ export default defineComponent({
     ]);
     const randomMail = computed(() => store.getters['mail/email']);
 
-    store.dispatch('mail/getRandomMail');
+    store
+      .dispatch('mail/getRandomMail')
+      .then(() => store.dispatch('mail/connectWS'))
+      .then(() => store.dispatch('mail/getMessages'));
 
     return {
       actions,

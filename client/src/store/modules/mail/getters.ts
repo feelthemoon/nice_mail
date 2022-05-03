@@ -5,6 +5,7 @@ import { IRootState } from '@/store/modules/root/root.types';
 const MailGetters: GetterTree<IMailState, IRootState> = {
   email: (state: IMailState) => state.email,
   messages: (state: IMailState) => state.messages,
+  socket: (state: IMailState) => state.socket,
 };
 
 export default MailGetters;
