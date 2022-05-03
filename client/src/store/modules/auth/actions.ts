@@ -8,10 +8,10 @@ const AuthActions: ActionTree<null, IRootState> = {
     try {
       const res = await API.AUTH.login(userData);
       commit('SET_TOKEN', res.data.headers.authorization, { root: true });
-    } catch (e) {
+    } catch (e: any) {
       dispatch(
         'updateAlerts',
-        { message: `[ERROR]: ${e.response.data?.message || 'Unknown error'}`, severity: 'error' },
+        { message: e.response?.data.error ?? 'Unknown error', severity: 'error' },
         { root: true }
       );
     }
@@ -20,10 +20,10 @@ const AuthActions: ActionTree<null, IRootState> = {
     try {
       const res = await API.AUTH.register(userData);
       commit('SET_TOKEN', res.data.headers.authorization, { root: true });
-    } catch (e) {
+    } catch (e: any) {
       dispatch(
         'updateAlerts',
-        { message: `[ERROR]: ${e.response.data?.message || 'Unknown error'}`, severity: 'error' },
+        { message: e.response?.data.error ?? 'Unknown error', severity: 'error' },
         { root: true }
       );
     }

@@ -7,9 +7,7 @@ import RootModule from '@/store/modules/root';
 export const key: InjectionKey<Store<IRootState>> = Symbol();
 
 export default createStore<IRootState>({
-  modules: {
-    RootModule,
-  },
+  ...RootModule,
   plugins: [vuexLocal.plugin],
 });
 

@@ -2,7 +2,15 @@
   <div class="tempbox flex flex-column align-items-center p-8">
     <h1 class="tempbox__title text-center">Get Free Temporary Email Address</h1>
     <div class="tempbox__field flex align-items-center mt-3">
-      <InputText class="w-25rem border-300 cursor-pointer" disabled></InputText>
+      <span class="p-input-icon-right" @click="copyToClipboard">
+        <i class="pi pi-spin pi-spinner" v-if="isLoading" />
+        <InputText
+          class="w-25rem border-300 cursor-pointer"
+          disabled
+          ref="tempmail"
+          :model-value="randomMail"
+        ></InputText>
+      </span>
       <div class="tempbox__actions ml-2" :style="{ position: 'relative', height: '45px' }">
         <div class="tempbox__btn">
           <SpeedDial
@@ -20,7 +28,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { computed, defineComponent, ref, reactive } from 'vue';
+import { useStore } from '@/store';
 import InputText from 'primevue/inputtext';
 import SpeedDial from 'primevue/speeddial';
 
@@ -31,6 +40,18 @@ export default defineComponent({
     SpeedDial,
   },
   setup() {
+    const store = useStore();
+    const tempmail = ref();
+    const isLoading = computed(() => store.getters.loadingByNamespace('tempbox'));
+
+    const copyToClipboard = () => {
+      if (!isLoading.value) {
+        navigator.clipboard.writeText(tempmail.value['modelValue']).then(() => {
+          store.dispatch('updateAlerts', { message: 'Successfully copied', severity: 'success' });
+        });
+      }
+    };
+
     const actions = reactive([
       {
         label: 'Save',
@@ -43,20 +64,28 @@ export default defineComponent({
         label: 'Refresh',
         icon: 'pi pi-refresh',
         command: () => {
-          return;
+          return store.dispatch('mail/getRandomMail', { force: true });
         },
       },
       {
         label: 'Copy',
         icon: 'pi pi-copy',
         command: () => {
+          copyToClipboard();
           return;
         },
       },
     ]);
+    const randomMail = computed(() => store.getters['mail/email']);
+
+    store.dispatch('mail/getRandomMail');
 
     return {
       actions,
+      randomMail,
+      isLoading,
+      tempmail,
+      copyToClipboard,
     };
   },
 });
