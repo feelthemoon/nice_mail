@@ -7,9 +7,9 @@ export class AuthApi extends _BaseApi {
     super();
   }
   public login(user: IUserDto): Promise<AxiosResponse> {
-    return this.executeRequest('login', 'POST', user);
+    return this.executeRequest(false, 'login', 'POST', user);
   }
   public register(user: IUserDto): Promise<AxiosResponse> {
-    return this.executeRequest('register', 'POST', user);
+    return this.executeRequest(false, 'register', 'POST', user);
   }
 }

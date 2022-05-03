@@ -6,7 +6,7 @@ export class MailApi extends _BaseApi {
     super();
   }
 
-  public getRandomMail(token: string): Promise<AxiosResponse> {
-    return this.executeRequest('mail/get', 'GET', null, null, { Authorization: token });
+  public getRandomMail(mailToken: string): Promise<AxiosResponse> {
+    return this.executeRequest(true, 'mail', 'GET', null, null, { 'Mail-Token': mailToken });
   }
 }

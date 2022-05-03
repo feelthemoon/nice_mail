@@ -6,9 +6,9 @@
         :key="i"
         :life="alert.life"
         :sticky="false"
-        :summary="alert.message"
         :severity="alert.severity"
       >
+        {{ alert.message }}
       </Message>
     </div>
     <Header></Header>
