@@ -8,6 +8,9 @@ const MailMutations: MutationTree<IMailState> = {
   SET_MESSAGES(state: IMailState, messages: []) {
     state.messages = messages;
   },
+  SET_SOCKET(state: IMailState, socket) {
+    state.socket = socket;
+  },
 };
 
 export default MailMutations;
