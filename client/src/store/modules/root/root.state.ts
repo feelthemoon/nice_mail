@@ -5,6 +5,7 @@ const RootState: IRootState = {
   alerts: [],
   loading: [],
   mailToken: '',
+  errors: [],
 };
 
 export default RootState;

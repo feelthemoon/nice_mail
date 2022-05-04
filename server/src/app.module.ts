@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { TempmailModule } from './tempmail/tempmail.module';
+import { TempmailRestMiddleware } from './tempmail/rest/tempmail.rest.middleware';
 
 @Module({
   imports: [
@@ -23,4 +24,8 @@ import { TempmailModule } from './tempmail/tempmail.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(TempmailRestMiddleware).exclude('/login', '/register').forRoutes('*');
+  }
+}

@@ -44,23 +44,9 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const messages = computed(() => store.getters['mail/messages']);
-
     return {
       messages,
     };
   },
 });
 </script>
-
-<style scoped lang="scss">
-.messagebox {
-  max-width: 750px;
-  width: 100%;
-  &__content {
-    border: 1px solid var(--primary-color);
-    min-height: 450px;
-    border-top: none;
-    border-radius: 0 0 10px 10px;
-  }
-}
-</style>

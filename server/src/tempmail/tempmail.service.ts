@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
@@ -29,6 +29,20 @@ export class TempmailService {
       ),
     );
     return messages.data;
+  }
+
+  async readMessage(mail: string, id: number) {
+    const [login, domain] = mail.split('@');
+
+    const messageContent = await lastValueFrom(
+      this.httpService.get(
+        `${process.env.SEC_MAIL_API}?action=readMessage&login=${login}&domain=${domain}&id=${id}`,
+      ),
+    );
+    if (messageContent.data === 'Message not found') {
+      throw new NotFoundException();
+    }
+    return messageContent.data;
   }
 
   private async generateMail(count: number) {

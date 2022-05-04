@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { TempmailController } from './tempmail.controller';
+import { TempmailController } from './rest/tempmail.controller';
 import { TempmailService } from './tempmail.service';
 import { HttpModule } from '@nestjs/axios';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
-import { TempmailGateway } from './tempmail.gateway';
+import { TempmailGateway } from './socket/tempmail.gateway';
 
 @Module({
   imports: [

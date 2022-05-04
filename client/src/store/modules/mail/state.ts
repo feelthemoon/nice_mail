@@ -4,6 +4,7 @@ const MailState: IMailState = {
   email: '',
   messages: [],
   socket: null,
+  currentMessage: Object(),
 };
 
 export default MailState;

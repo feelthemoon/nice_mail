@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { PipeTransform, Injectable } from '@nestjs/common';
 
 @Injectable()
-export class TempmailPipe implements PipeTransform {
+export class TempmailSocketPipe implements PipeTransform {
   constructor(private readonly jwtService: JwtService) {}
   transform(socket: Socket) {
     if (socket && socket.handshake) {
@@ -14,7 +14,10 @@ export class TempmailPipe implements PipeTransform {
         })['mail'][0];
         return socket;
       } catch (e) {
-        socket.emit('CLIENT:ERROR:GET_MESSAGES', 'Your email was expired! Try to reload page.');
+        socket.emit(
+          'CLIENT:ERROR:GET_MESSAGES',
+          'Oops! Your email was expired:( Try to refresh page.',
+        );
       }
     }
   }

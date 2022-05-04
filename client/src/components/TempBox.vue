@@ -80,11 +80,7 @@ export default defineComponent({
       },
     ]);
     const randomMail = computed(() => store.getters['mail/email']);
-
-    store
-      .dispatch('mail/getRandomMail')
-      .then(() => store.dispatch('mail/connectWS'))
-      .then(() => store.dispatch('mail/getMessages'));
+    store.dispatch('mail/getRandomMail');
 
     return {
       actions,
