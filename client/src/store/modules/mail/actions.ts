@@ -3,6 +3,7 @@ import { IRootState } from '@/store/modules/root/root.types';
 import { ActionTree } from 'vuex';
 import { IMailState } from '@/store/modules/mail/mail.types';
 import { io } from 'socket.io-client';
+import { AxiosError } from 'axios';
 
 const MailActions: ActionTree<IMailState, IRootState> = {
   async getRandomMail(
@@ -15,15 +16,17 @@ const MailActions: ActionTree<IMailState, IRootState> = {
       const res = await API.MAIL.getRandomMail(mailToken);
       commit('SET_EMAIL', res.data.mail[0]);
       commit('SET_MAIL_TOKEN', res.headers['mail-token'], { root: true });
-    } catch (e: any) {
-      dispatch(
-        'updateAlerts',
-        {
-          message: e.response?.data.error ?? 'Unknown Error',
-          severity: 'error',
-        },
-        { root: true }
-      );
+    } catch (e: unknown) {
+      if (e instanceof AxiosError) {
+        dispatch(
+          'updateAlerts',
+          {
+            message: e.response?.data.error ?? 'Unknown Error',
+            severity: 'error',
+          },
+          { root: true }
+        );
+      }
     } finally {
       commit('UPDATE_LOADING', { namespace: 'tempbox', loading: false }, { root: true });
     }
@@ -77,7 +80,42 @@ const MailActions: ActionTree<IMailState, IRootState> = {
   },
 
   getMessages({ getters }) {
-    getters.socket.emit('CLIENT:GET_MESSAGES');
+    getters.socket?.emit('CLIENT:GET_MESSAGES');
+  },
+
+  disconnectWS({ commit, getters }) {
+    getters.socket.disconnect();
+    commit('SET_SOCKET', null);
+  },
+
+  async readMessage({ rootGetters, commit, dispatch }, { id }: { id: number }) {
+    try {
+      commit('UPDATE_LOADING', { namespace: 'messageView', loading: true }, { root: true });
+      const res = await API.MAIL.readMessage(rootGetters.mailToken, id);
+      commit('SET_CURRENT_MESSAGE', res.data);
+    } catch (e: unknown) {
+      if (e instanceof AxiosError) {
+        commit(
+          'UPDATE_ERRORS',
+          {
+            namespace: 'messageView',
+            message: e.response?.data.error ?? 'Unknown Error',
+            statusCode: e.response?.status ?? 500,
+          },
+          { root: true }
+        );
+        dispatch(
+          'updateAlerts',
+          {
+            message: e.response?.data.error ?? 'Unknown Error',
+            severity: 'error',
+          },
+          { root: true }
+        );
+      }
+    } finally {
+      commit('UPDATE_LOADING', { namespace: 'messageView', loading: false }, { root: true });
+    }
   },
 };
 

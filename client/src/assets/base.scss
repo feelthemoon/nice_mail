@@ -26,3 +26,15 @@ body {
   width: 45px !important;
   height: 45px !important;
 }
+
+.messagebox {
+  max-width: 750px;
+  width: 100%;
+  &__content {
+    border: 1px solid var(--primary-color);
+    height: 450px;
+    overflow-y: auto;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+  }
+}

@@ -1,4 +1,4 @@
-import { ILoading, IRootState } from '@/store/modules/root/root.types';
+import { IError, ILoading, IRootState } from '@/store/modules/root/root.types';
 import { MutationTree } from 'vuex';
 import { IAlert } from '@/store/modules/root/root.types';
 
@@ -19,6 +19,16 @@ const RootMutations: MutationTree<IRootState> = {
   },
   SET_MAIL_TOKEN(state: IRootState, mailToken: string) {
     state.mailToken = mailToken;
+  },
+  UPDATE_ERRORS(state: IRootState, error: IError) {
+    const errorId = state.errors[state.errors.length - 1]?.id ?? 0;
+    state.errors.push({ ...error, id: errorId + 1 });
+  },
+  DELETE_ERROR(state: IRootState, error: IError) {
+    state.errors.splice(
+      state.errors.findIndex((e) => e.id === error.id),
+      1
+    );
   },
 };
 

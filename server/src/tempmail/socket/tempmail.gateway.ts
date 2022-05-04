@@ -8,8 +8,8 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { Logger, UsePipes } from '@nestjs/common';
-import { TempmailService } from './tempmail.service';
-import { TempmailPipe } from './tempmail.pipe';
+import { TempmailService } from '../tempmail.service';
+import { TempmailSocketPipe } from './tempmail.socket.pipe';
 
 @WebSocketGateway({ port: 80, cors: true })
 export class TempmailGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -18,7 +18,7 @@ export class TempmailGateway implements OnGatewayInit, OnGatewayConnection, OnGa
   @WebSocketServer() server: Server;
   private logger: Logger = new Logger('MessageGateway');
 
-  @UsePipes(TempmailPipe)
+  @UsePipes(TempmailSocketPipe)
   @SubscribeMessage('CLIENT:GET_MESSAGES')
   async handleGetMessages(client: Socket) {
     try {
@@ -27,11 +27,6 @@ export class TempmailGateway implements OnGatewayInit, OnGatewayConnection, OnGa
     } catch (e) {
       this.server.to(client?.id).emit('SERVER:ERROR:GET_MESSAGES', 'Server Error');
     }
-  }
-
-  @SubscribeMessage('CLIENT:ERROR:GET_MESSAGES')
-  handleEmailError(client: Socket) {
-    console.log('ok');
   }
 
   afterInit(server: Server) {
