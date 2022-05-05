@@ -1,5 +1,5 @@
 
-[![logo.png](https://i.postimg.cc/wBPh4dNH/logo.png)](https://postimg.cc/DWrJmH5Y)
+[![logo.png](https://i.postimg.cc/fykFYsYd/logo.png)](https://postimg.cc/zHZ019tD)
 
 
 # Nice Mail
