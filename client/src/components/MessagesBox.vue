@@ -3,7 +3,7 @@
     <header class="messagebox__header bg-primary py-3 px-5">
       <ul class="messagebox__header-titles flex justify-content-between align-items-center">
         <li class="list-none">From</li>
-        <li class="list-none">Message</li>
+        <li class="list-none">Subject</li>
         <li class="list-none">Date</li>
       </ul>
     </header>

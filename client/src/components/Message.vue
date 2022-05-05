@@ -4,8 +4,8 @@
       class="message flex justify-content-between align-items-center px-5 py-2 cursor-pointer hover:text-black-alpha-60 hover:bg-blue-100 transition-all transition-duration-300"
     >
       <p class="message__from font-bold text-sm">{{ message.from }}</p>
-      <p class="message__text overflow-hidden text-overflow-ellipsis text-sm">
-        {{ message.subject }}
+      <p class="message__text overflow-hidden text-overflow-ellipsis text-sm font-italic">
+        {{ message.subject || 'No subject' }}
       </p>
       <time class="message__date font-italic text-xs">{{ formattedDate }}</time>
     </div>
