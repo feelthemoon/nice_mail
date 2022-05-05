@@ -28,9 +28,22 @@
         </div>
         <div class="messagebox__subheader-subject flex mt-3 mb-4">
           <p class="mr-2">Subject:</p>
-          <span>{{ message.subject }}</span>
+          <span class="font-italic">{{ message.subject || 'No subject' }}</span>
         </div>
-        <message-view :content="message.body"></message-view>
+        <div class="messagebox__attachments flex mb-3">
+          <a
+            target="_blank"
+            :href="`https://www.1secmail.com/api/v1/?action=download&login=${email[0]}&domain=${email[1]}&id=${message.id}&file=${attachment.filename}`"
+            class="attachment mr-4 flex flex-column align-items-center no-underline hover:bg-black-alpha-20 p-2 transition-all transition-duration-300"
+            v-for="(attachment, i) in message.attachments"
+            :key="i"
+          >
+            <Icon :name="getIconAttachmentName(attachment)" width="65px" height="65px"></Icon>
+            <p class="attachment__name text-white mt-2">{{ attachment.filename }}</p>
+          </a>
+        </div>
+        <message-view v-if="message.body" :content="message.body"></message-view>
+        <p v-else class="font-bold font-italic">No message text</p>
       </template>
       <template v-else>
         <div class="loading mt-8 flex flex-column align-items-center">
@@ -46,21 +59,31 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { computed, defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from '@/store';
 import ProgressSpinner from 'primevue/progressspinner';
+import Icon from '@/components/Icon.vue';
+import { IAttachment } from '@/store/modules/mail/mail.types';
 
 export default defineComponent({
   name: 'MessageViewBox',
   components: {
+    Icon,
     ProgressSpinner,
   },
   setup() {
     const route = useRoute();
     const store = useStore();
     const router = useRouter();
+    const attachmentTypes = {
+      'vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
+      pdf: 'pdf',
+      zip: 'zip',
+      png: 'png',
+      unknown: 'unknown',
+    };
 
     const error = computed(() => store.getters.errorByNamespace('messageView'));
 
@@ -76,8 +99,16 @@ export default defineComponent({
     const message = computed(() => store.getters['mail/currentMessage']);
     const avatarLetter = computed(() => message.value.from?.[0].toUpperCase());
     const loading = computed(() => store.getters.loadingByNamespace('messageView'));
+    const email = computed(() => store.getters['mail/email'].split('@'));
 
-    return { message, avatarLetter, loading, error };
+    const getIconAttachmentName = (attachment: IAttachment): string => {
+      return (
+        attachmentTypes[attachment.contentType.split('/')[1] as keyof typeof attachmentTypes] ||
+        attachmentTypes['unknown']
+      );
+    };
+
+    return { message, avatarLetter, loading, error, email, getIconAttachmentName };
   },
 });
 </script>
@@ -99,6 +130,13 @@ export default defineComponent({
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .attachment {
+    &__name {
+      max-width: 140px;
+      text-align: center;
+      word-break: break-all;
+    }
   }
 }
 </style>

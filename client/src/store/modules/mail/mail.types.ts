@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io-client';
 
-interface IAttachment {
+export interface IAttachment {
   filename: string;
   contentType: string;
   size: number;
