@@ -3,7 +3,7 @@
     <div class="header__inner flex justify-content-between align-items-center px-4">
       <div class="logo">
         <router-link to="/">
-          <img src="@/assets/static/logo.svg" alt="Nice Mail" width="100" height="100" />
+          <Icon name="logo" width="100px" height="100px" />
         </router-link>
       </div>
       <div class="header__auth">
@@ -16,9 +16,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import AuthDialog from '@/components/AuthDialog.vue';
+import Icon from '@/components/Icon.vue';
 
 export default defineComponent({
   components: {
+    Icon,
     AuthDialog,
   },
 });
