@@ -26,11 +26,11 @@
             </time>
           </div>
         </div>
-        <div class="messagebox__subheader-subject flex mt-3">
+        <div class="messagebox__subheader-subject flex mt-3 mb-4">
           <p class="mr-2">Subject:</p>
           <span>{{ message.subject }}</span>
         </div>
-        <div class="messagebox__content-html mt-4" v-html="message.body"></div>
+        <message-view :content="message.body"></message-view>
       </template>
       <template v-else>
         <div class="loading mt-8 flex flex-column align-items-center">
