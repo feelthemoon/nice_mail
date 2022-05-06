@@ -81,7 +81,6 @@ export default defineComponent({
       'vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
       pdf: 'pdf',
       zip: 'zip',
-      png: 'png',
       unknown: 'unknown',
     };
 
