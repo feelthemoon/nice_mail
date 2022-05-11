@@ -1,0 +1,33 @@
+{
+  "copyMail": "Скопировано!",
+  "pages": {
+    "index": {
+      "tempbox": {
+        "title": "Бесплатный временный адрес электронной почты",
+        "tooltips": {
+          "refresh": "Обновить",
+          "copy": "Скопировать"
+        }
+      },
+      "messagebox": {
+        "from": "От",
+        "subject": "Тема",
+        "date": "Дата",
+        "loading": "Жду новых сообщений"
+      },
+      "message": {
+        "no-subject": "Нет темы"
+      }
+    },
+    "messageView": {
+      "messageViewBox": {
+        "back": "Назад",
+        "datetime": "ДатаВремя:",
+        "subject": "Тема:",
+        "no-subject": "Нет темы",
+        "no-text": "Нет текста сообщения",
+        "loading": "Загрузка сообщения..."
+      }
+    }
+  }
+}

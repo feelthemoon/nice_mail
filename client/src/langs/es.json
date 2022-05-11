@@ -1,0 +1,33 @@
+{
+  "copyMail": "Copiado con éxito!",
+  "pages": {
+    "index": {
+      "tempbox": {
+        "title": "Obtener una dirección de correo electrónico temporal gratuita",
+        "tooltips": {
+          "refresh": "Refrescar",
+          "copy": "Copiar"
+        }
+      },
+      "messagebox": {
+        "from": "De",
+        "subject": "Asunto",
+        "date": "Fecha",
+        "loading": "Esperando nuevos mensajes"
+      },
+      "message": {
+        "no-subject": "No asunto"
+      }
+    },
+    "messageView": {
+      "messageViewBox": {
+        "back": "Back",
+        "datetime": "DateTime:",
+        "subject": "Subject:",
+        "no-subject": "No Subject",
+        "no-text": "Sin texto del mensaje",
+        "loading": "Cargando mensaje..."
+      }
+    }
+  }
+}

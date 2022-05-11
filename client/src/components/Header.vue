@@ -6,22 +6,20 @@
           <Icon name="logo" width="100px" height="100px" />
         </router-link>
       </div>
-      <div class="header__auth">
-        <auth-dialog></auth-dialog>
-      </div>
+      <change-lang></change-lang>
     </div>
   </header>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import AuthDialog from '@/components/AuthDialog.vue';
 import Icon from '@/components/Icon.vue';
+import ChangeLang from '@/components/ChangeLang.vue';
 
 export default defineComponent({
   components: {
+    ChangeLang,
     Icon,
-    AuthDialog,
   },
 });
 </script>

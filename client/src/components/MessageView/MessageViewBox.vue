@@ -4,7 +4,7 @@
       <div class="messagebox__header-titles flex align-items-center">
         <router-link to="/" class="text-white font-bold no-underline">
           <i class="pi pi-arrow-left text-white mr-3"></i>
-          Back
+          {{ $t('pages.messageView.messageViewBox.back') }}
         </router-link>
       </div>
     </header>
@@ -20,15 +20,17 @@
             <div class="messagebox__from">{{ message.from }}</div>
           </div>
           <div class="messagebox__subheader-right">
-            <p>DateTime:</p>
+            <p>{{ $t('pages.messageView.messageViewBox.datetime') }}</p>
             <time class="messagebox__date">
               {{ message.date }}
             </time>
           </div>
         </div>
         <div class="messagebox__subheader-subject flex mt-3 mb-4">
-          <p class="mr-2">Subject:</p>
-          <span class="font-italic">{{ message.subject || 'No subject' }}</span>
+          <p class="mr-2">{{ $t('pages.messageView.messageViewBox.subject') }}</p>
+          <span class="font-italic">{{
+            message.subject || $t('pages.messageView.messageViewBox.no-subject')
+          }}</span>
         </div>
         <div class="messagebox__attachments flex mb-3">
           <a
@@ -43,7 +45,9 @@
           </a>
         </div>
         <message-view v-if="message.body" :content="message.body"></message-view>
-        <p v-else class="font-bold font-italic">No message text</p>
+        <p v-else class="font-bold font-italic">
+          {{ $t('pages.messageView.messageViewBox.no-text') }}
+        </p>
       </template>
       <template v-else>
         <div class="loading mt-8 flex flex-column align-items-center">
@@ -52,7 +56,9 @@
             strokeWidth="8"
             animationDuration=".5s"
           />
-          <p class="loading__text mt-3 text-bluegray-400 text-lg">Loading message...</p>
+          <p class="loading__text mt-3 text-bluegray-400 text-lg">
+            {{ $t('pages.messageView.messageViewBox.loading') }}
+          </p>
         </div>
       </template>
     </section>
