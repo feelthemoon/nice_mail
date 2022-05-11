@@ -1,0 +1,33 @@
+{
+  "copyMail": "Successfully copied!",
+  "pages": {
+    "index": {
+      "tempbox": {
+        "title": "Get Free Temporary Email Address",
+        "tooltips": {
+          "refresh": "Refresh",
+          "copy": "Copy"
+        }
+      },
+      "messagebox": {
+        "from": "From",
+        "subject": "Subject",
+        "date": "Date",
+        "loading": "Waiting for new messages"
+      },
+      "message": {
+        "no-subject": "No subject"
+      }
+    },
+    "messageView": {
+      "messageViewBox": {
+        "back": "Back",
+        "datetime": "DateTime:",
+        "subject": "Subject:",
+        "no-subject": "No Subject",
+        "no-text": "No Message Text",
+        "loading": "Loading message..."
+      }
+    }
+  }
+}

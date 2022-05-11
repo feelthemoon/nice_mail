@@ -1,6 +1,6 @@
 <template>
   <div class="tempbox flex flex-column align-items-center p-8">
-    <h1 class="tempbox__title text-center">Get Free Temporary Email Address</h1>
+    <h1 class="tempbox__title text-center">{{ t('pages.index.tempbox.title') }}</h1>
     <div class="tempbox__field flex align-items-center mt-3">
       <span class="p-input-icon-right" @click="copyToClipboard">
         <i class="pi pi-spin pi-spinner" v-if="isLoading" />
@@ -30,6 +30,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref, reactive } from 'vue';
 import { useStore } from '@/store';
+import { useI18n } from 'vue-i18n';
 import InputText from 'primevue/inputtext';
 import SpeedDial from 'primevue/speeddial';
 
@@ -42,26 +43,24 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const tempmail = ref();
+    const { t } = useI18n();
+
     const isLoading = computed(() => store.getters.loadingByNamespace('tempbox'));
 
     const copyToClipboard = () => {
       if (!isLoading.value) {
         navigator.clipboard.writeText(tempmail.value['modelValue']).then(() => {
-          store.dispatch('updateAlerts', { message: 'Successfully copied', severity: 'success' });
+          store.dispatch('updateAlerts', {
+            message: computed(() => t('copyMail')),
+            severity: 'success',
+          });
         });
       }
     };
 
     const actions = reactive([
       {
-        label: 'Save',
-        icon: 'pi pi-bookmark',
-        command: () => {
-          return;
-        },
-      },
-      {
-        label: 'Refresh',
+        label: computed(() => t('pages.index.tempbox.tooltips.refresh')),
         icon: 'pi pi-refresh',
         command: () => {
           return store
@@ -71,7 +70,7 @@ export default defineComponent({
         },
       },
       {
-        label: 'Copy',
+        label: computed(() => t('pages.index.tempbox.tooltips.copy')),
         icon: 'pi pi-copy',
         command: () => {
           copyToClipboard();
@@ -87,6 +86,7 @@ export default defineComponent({
       randomMail,
       isLoading,
       tempmail,
+      t,
       copyToClipboard,
     };
   },

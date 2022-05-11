@@ -18,6 +18,15 @@ module.exports = {
         plainSprite: true,
       },
     },
+    i18n: {
+      locale: 'en',
+      fallbackLocale: 'en',
+      localeDir: 'langs',
+      enableLegacy: false,
+      runtimeOnly: false,
+      compositionOnly: true,
+      fullInstall: true,
+    },
   },
   chainWebpack: (config) => {
     config.module.rule('svg-sprite').use('svgo-loader').loader('svgo-loader');

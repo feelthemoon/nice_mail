@@ -38,3 +38,14 @@ body {
     border-radius: 0 0 10px 10px;
   }
 }
+
+.lang-change {
+  &.p-focus {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .p-dropdown-trigger {
+    width: 20px !important;
+    margin-left: -20px;
+  }
+}

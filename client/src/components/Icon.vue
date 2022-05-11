@@ -24,10 +24,10 @@ export default defineComponent({
     },
   },
   // eslint-disable-next-line vue/no-setup-props-destructure
-  setup({ name }) {
+  setup(props) {
     const iconPath = computed(() => {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
-      let icon = require(`@/assets/static/${name}.svg`);
+      let icon = require(`@/assets/static/${props.name}.svg`);
 
       if (Object.prototype.hasOwnProperty.call(icon, 'default')) {
         icon = icon.default;
@@ -35,7 +35,7 @@ export default defineComponent({
 
       return icon.url ? icon.url : `#${icon.id}`;
     });
-    const className = computed(() => 'svg-icon svg-icon-' + name);
+    const className = computed(() => 'svg-icon svg-icon-' + props.name);
 
     return { iconPath, className };
   },

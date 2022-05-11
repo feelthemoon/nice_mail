@@ -5,7 +5,7 @@
     >
       <p class="message__from font-bold text-sm">{{ message.from }}</p>
       <p class="message__text overflow-hidden text-overflow-ellipsis text-sm font-italic">
-        {{ message.subject || 'No subject' }}
+        {{ message.subject || $t('pages.index.message.no-subject') }}
       </p>
       <time class="message__date font-italic text-xs">{{ formattedDate }}</time>
     </div>

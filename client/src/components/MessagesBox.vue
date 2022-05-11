@@ -2,9 +2,9 @@
   <div class="messagebox mt-3 mx-auto">
     <header class="messagebox__header bg-primary py-3 px-5">
       <ul class="messagebox__header-titles flex justify-content-between align-items-center">
-        <li class="list-none">From</li>
-        <li class="list-none">Subject</li>
-        <li class="list-none">Date</li>
+        <li class="list-none">{{ $t('pages.index.messagebox.from') }}</li>
+        <li class="list-none">{{ $t('pages.index.messagebox.subject') }}</li>
+        <li class="list-none">{{ $t('pages.index.messagebox.date') }}</li>
       </ul>
     </header>
     <section class="messagebox__content py-3">
@@ -22,7 +22,9 @@
             strokeWidth="8"
             animationDuration=".5s"
           />
-          <p class="loading__text mt-3 text-bluegray-400 text-lg">Waiting for new messages</p>
+          <p class="loading__text mt-3 text-bluegray-400 text-lg">
+            {{ $t('pages.index.messagebox.loading') }}
+          </p>
         </div>
       </template>
     </section>
