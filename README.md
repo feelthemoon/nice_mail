@@ -25,16 +25,6 @@ To run this project, you will need to add the following environment variables to
 # Server
 `APP_PORT` - Port for start Server
 
-`PG_PORT` - Postgres Database Port
-
-`PG_HOST` - Postgres Database Host
-
-`PG_USERNAME` - Postgres Database Username
-
-`PG_PASSWORD` - Postgres Database Password
-
-`PG_DATABASE` - Postgres Database Database Name
-
 `SEC_MAIL_API` - API for generate email
 
 `JWT_SECRET_KEY` - JWT secret key
