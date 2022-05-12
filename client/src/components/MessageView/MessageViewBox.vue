@@ -11,7 +11,7 @@
     <section class="messagebox__content py-3 px-4">
       <template v-if="!loading && !error">
         <div
-          class="messagebox__subheader border-bottom-1 pb-3 flex justify-content-between align-items-center"
+          class="messagebox__subheader border-bottom-1 pb-3"
         >
           <div class="messagebox__subheader-left flex align-items-center">
             <div class="messagebox__avatar">
@@ -141,6 +141,20 @@ export default defineComponent({
       max-width: 140px;
       text-align: center;
       word-break: break-all;
+    }
+  }
+  &__subheader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: start;
+    }
+    &-right {
+      @media (max-width: 768px) {
+        margin-top: 15px;
+      }
     }
   }
 }
