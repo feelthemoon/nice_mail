@@ -13,6 +13,11 @@ body,
   height: 100%;
 }
 
+.container {
+  @media (max-width: 768px) {
+    padding: 0 15px;
+  }
+}
 body {
   background: var(--surface-overlay);
   color: white;
