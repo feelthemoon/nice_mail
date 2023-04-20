@@ -19,7 +19,7 @@ To run this project, you will need to add the following environment variables to
 # Client
 `VUE_APP_API_URL` - URL for connect with `API`
 
-`VUE_APP_SOCKET_URL` - URL for connect `SOCKET RUNTIME API`
+`VUE_APP_SOCKET_URL` - URL for connect `SOCKET REALTIME API`
 
 ---
 # Server
